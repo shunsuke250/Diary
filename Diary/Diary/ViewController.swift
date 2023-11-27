@@ -13,6 +13,13 @@ class ViewController: UIViewController {
         return $0
     }(UITableView())
 
+    private let addButton: UIButton = {
+        $0.setImage(.add, for: .normal)
+        $0.contentVerticalAlignment = .fill
+        $0.contentHorizontalAlignment = .fill
+        return $0
+    }(UIButton())
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -23,9 +30,15 @@ class ViewController: UIViewController {
 
     private func setup() {
         view.addSubview(tableView)
+        view.addSubview(addButton)
 
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+
+        addButton.snp.makeConstraints {
+            $0.right.bottom.equalToSuperview().inset(40)
+            $0.size.equalTo(60)
         }
     }
 }
