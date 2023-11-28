@@ -13,7 +13,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        if #available(iOS 15.0, *) {
+            //ナビゲーションバーの外観設定を宣言
+            let navigationBarAppearance = UINavigationBarAppearance()
+            //デフォルトの背景色を設定
+            navigationBarAppearance.backgroundColor = Color.yellow
+            //各モードに代入
+            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+            UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+            
+            //ナビゲーションバーのタイトル文字の色変更
+            navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        }
         return true
     }
 

@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(DiaryTableViewCell.self, forCellReuseIdentifier: "cell")
+        title = "日記一覧"
         setup()
     }
 
