@@ -14,6 +14,8 @@
 		ABA00C072B12E3FD007EE2EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABA00C052B12E3FD007EE2EB /* LaunchScreen.storyboard */; };
 		ABA00C102B12E4DE007EE2EB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ABA00C0F2B12E4DE007EE2EB /* SnapKit */; };
 		ABA00C122B12E4DE007EE2EB /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = ABA00C112B12E4DE007EE2EB /* SnapKit-Dynamic */; };
+		ABA00C142B12EA6F007EE2EB /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA00C132B12EA6F007EE2EB /* UIConstants.swift */; };
+		ABA00C182B12F0D8007EE2EB /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA00C172B12F0D8007EE2EB /* DiaryTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		ABA00C032B12E3FD007EE2EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ABA00C062B12E3FD007EE2EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ABA00C082B12E3FD007EE2EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABA00C132B12EA6F007EE2EB /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
+		ABA00C172B12F0D8007EE2EB /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 				ABA00BFA2B12E3FB007EE2EB /* AppDelegate.swift */,
 				ABA00BFC2B12E3FB007EE2EB /* SceneDelegate.swift */,
 				ABA00BFE2B12E3FB007EE2EB /* ViewController.swift */,
+				ABA00C172B12F0D8007EE2EB /* DiaryTableViewCell.swift */,
+				ABA00C132B12EA6F007EE2EB /* UIConstants.swift */,
 				ABA00C032B12E3FD007EE2EB /* Assets.xcassets */,
 				ABA00C052B12E3FD007EE2EB /* LaunchScreen.storyboard */,
 				ABA00C082B12E3FD007EE2EB /* Info.plist */,
@@ -146,8 +152,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABA00BFF2B12E3FB007EE2EB /* ViewController.swift in Sources */,
+				ABA00C182B12F0D8007EE2EB /* DiaryTableViewCell.swift in Sources */,
 				ABA00BFB2B12E3FB007EE2EB /* AppDelegate.swift in Sources */,
 				ABA00BFD2B12E3FB007EE2EB /* SceneDelegate.swift in Sources */,
+				ABA00C142B12EA6F007EE2EB /* UIConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
