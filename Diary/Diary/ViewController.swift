@@ -14,9 +14,13 @@ class ViewController: UIViewController {
     }(UITableView())
 
     private let addButton: UIButton = {
-        $0.setImage(.add, for: .normal)
-        $0.contentVerticalAlignment = .fill
-        $0.contentHorizontalAlignment = .fill
+        var config = UIButton.Configuration.filled()
+        config.image = .init(systemName: "plus")
+        config.baseForegroundColor = .appBlack
+        config.baseBackgroundColor = .appButtonYellow
+        config.buttonSize = .medium
+        config.cornerStyle = .capsule
+        $0.configuration = config
         return $0
     }(UIButton())
 
