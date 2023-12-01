@@ -17,6 +17,7 @@
 		ABA00C142B12EA6F007EE2EB /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA00C132B12EA6F007EE2EB /* UIConstants.swift */; };
 		ABA00C182B12F0D8007EE2EB /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA00C172B12F0D8007EE2EB /* DiaryTableViewCell.swift */; };
 		ABA00C1A2B13032C007EE2EB /* DiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA00C192B13032C007EE2EB /* DiaryModel.swift */; };
+		ABA00C1C2B1A0B49007EE2EB /* NewDiaryEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA00C1B2B1A0B49007EE2EB /* NewDiaryEntryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		ABA00C132B12EA6F007EE2EB /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		ABA00C172B12F0D8007EE2EB /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		ABA00C192B13032C007EE2EB /* DiaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryModel.swift; sourceTree = "<group>"; };
+		ABA00C1B2B1A0B49007EE2EB /* NewDiaryEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryEntryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				ABA00BFA2B12E3FB007EE2EB /* AppDelegate.swift */,
 				ABA00BFC2B12E3FB007EE2EB /* SceneDelegate.swift */,
 				ABA00BFE2B12E3FB007EE2EB /* ViewController.swift */,
+				ABA00C1B2B1A0B49007EE2EB /* NewDiaryEntryViewController.swift */,
 				ABA00C192B13032C007EE2EB /* DiaryModel.swift */,
 				ABA00C172B12F0D8007EE2EB /* DiaryTableViewCell.swift */,
 				ABA00C132B12EA6F007EE2EB /* UIConstants.swift */,
@@ -160,6 +163,7 @@
 				ABA00BFB2B12E3FB007EE2EB /* AppDelegate.swift in Sources */,
 				ABA00BFD2B12E3FB007EE2EB /* SceneDelegate.swift in Sources */,
 				ABA00C142B12EA6F007EE2EB /* UIConstants.swift in Sources */,
+				ABA00C1C2B1A0B49007EE2EB /* NewDiaryEntryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
