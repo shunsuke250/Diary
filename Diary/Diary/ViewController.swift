@@ -45,6 +45,16 @@ class ViewController: UIViewController {
             $0.right.bottom.equalToSuperview().inset(40)
             $0.size.equalTo(60)
         }
+
+        addButton.addAction(UIAction { [weak self] _ in
+            self?.presentNewDiaryEntryViewController()
+        }, for: .touchUpInside)
+    }
+
+    private func presentNewDiaryEntryViewController() {
+        let newDiaryEntryVC = NewDiaryEntryViewController()
+        newDiaryEntryVC.modalPresentationStyle = .fullScreen
+        present(newDiaryEntryVC, animated: true, completion: nil)
     }
 }
 
