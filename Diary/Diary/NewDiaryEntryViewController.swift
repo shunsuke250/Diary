@@ -8,13 +8,9 @@
 import UIKit
 
 class NewDiaryEntryViewController: UIViewController {
-    private var pageViewController: UIPageViewController!
-
-    private let diaryInputTextView: UITextView = {
-        $0.backgroundColor = .cyan
-        $0.text = "ここに日記を入力"
+    private lazy var collectionView: UICollectionView = {
         return $0
-    }(UITextView())
+    }(UICollectionView(frame: .zero, collectionViewLayout: createLayout()))
 
     private let diaryDatePicker: UIDatePicker = {
         return $0
@@ -26,5 +22,29 @@ class NewDiaryEntryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(
+            TextViewCollectionViewCell.self,
+            forCellWithReuseIdentifier: "cell"
+        )
+extension NewDiaryEntryViewController: UICollectionViewDelegate {
+}
+
+extension NewDiaryEntryViewController: UICollectionViewDataSource {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        1
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+
+        return cell
     }
 }
