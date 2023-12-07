@@ -17,6 +17,7 @@ class NewDiaryEntryViewController: UIViewController {
     }(UIDatePicker())
 
     private let addDiaryButton: UIButton = {
+        $0.titleLabel?.text = "追加"
         return $0
     }(UIButton())
 
