@@ -9,9 +9,7 @@ import UIKit
 import SnapKit
 
 class ViewController: UIViewController {
-    private let tableView: UITableView = {
-        return $0
-    }(UITableView())
+    private let tableView = UITableView()
 
     private let addButton: UIButton = {
         var config = UIButton.Configuration.filled()
