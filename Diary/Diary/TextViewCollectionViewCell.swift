@@ -9,10 +9,13 @@ import UIKit
 
 class TextViewCollectionViewCell: UICollectionViewCell {
     private let textView: UITextView = {
-        $0.text = "ここに入力"
+        $0.text = "本文"
+        $0.font = .systemFont(ofSize: 16.0, weight: .regular)
+        $0.textColor = Color.black
+        $0.backgroundColor = .cyan
         return $0
     }(UITextView())
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -28,5 +31,9 @@ class TextViewCollectionViewCell: UICollectionViewCell {
         textView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+
+    func configure(item: String) {
+        textView.text = item
     }
 }
