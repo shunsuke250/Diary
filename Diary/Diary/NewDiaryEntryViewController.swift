@@ -8,9 +8,10 @@
 import UIKit
 
 class NewDiaryEntryViewController: UIViewController {
-    private lazy var collectionView: UICollectionView = {
-        return $0
-    }(UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout()))
+    private lazy var collectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: createCollectionViewLayout()
+    )
 
     private let diaryDatePicker: UIDatePicker = {
         return $0
