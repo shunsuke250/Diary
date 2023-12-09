@@ -75,11 +75,13 @@ class NewDiaryEntryViewController: UIViewController {
 
     private func setupConstrains() {
         view.addSubview(collectionView)
-        collectionView.backgroundColor = .red
 
         collectionView.snp.makeConstraints {
             $0.width.equalToSuperview()
-            $0.top.bottom.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
+    }
 
     private func setupToolBar() {
         let spacer = UIBarButtonItem(
@@ -107,9 +109,6 @@ class NewDiaryEntryViewController: UIViewController {
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .fractionalHeight(1.0)
         ))
-        item.contentInsets = NSDirectionalEdgeInsets(
-            top: 0, leading: 5, bottom: 0, trailing: 5
-        )
         let section = NSCollectionLayoutSection(
             group: NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(
