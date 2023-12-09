@@ -10,7 +10,7 @@ import UIKit
 class NewDiaryEntryViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         return $0
-    }(UICollectionView(frame: .zero, collectionViewLayout: createLayout()))
+    }(UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout()))
 
     private let diaryDatePicker: UIDatePicker = {
         return $0
@@ -31,7 +31,7 @@ class NewDiaryEntryViewController: UIViewController {
         )
         view.backgroundColor = .white
         setupConstrains()
-        collectionView.collectionViewLayout = createLayout()
+        collectionView.collectionViewLayout = createCollectionViewLayout()
     }
 
     private func setupConstrains() {
@@ -43,19 +43,22 @@ class NewDiaryEntryViewController: UIViewController {
         }
     }
 
-    private func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .absolute(44))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                       subitems: [item])
-        
-        let section = NSCollectionLayoutSection(group: group)
-        
-        
+    private func createCollectionViewLayout() -> UICollectionViewLayout {
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        ))
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: 0, leading: 5, bottom: 0, trailing: 5
+        )
+        let section = NSCollectionLayoutSection(
+            group: NSCollectionLayoutGroup.horizontal(
+                layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .fractionalHeight(1.0)
+            ), subitems: [item])
+        )
+        section.orthogonalScrollingBehavior = .paging // 横スクロールを有効にする
         let layout = UICollectionViewCompositionalLayout(section: section)
 
         return layout
@@ -70,7 +73,7 @@ extension NewDiaryEntryViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        1
+        2
     }
 
     func collectionView(
