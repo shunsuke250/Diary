@@ -13,6 +13,8 @@ class NewDiaryEntryViewController: UIViewController {
         collectionViewLayout: createCollectionViewLayout()
     )
 
+    private let toolBar = UIToolbar()
+
     private let diaryDatePicker: UIDatePicker = {
         return $0
     }(UIDatePicker())
@@ -21,6 +23,28 @@ class NewDiaryEntryViewController: UIViewController {
         $0.titleLabel?.text = "追加"
         return $0
     }(UIButton())
+
+    @objc func saveButtonTapped() {
+        self.view.endEditing(true)
+        toolBar.isHidden = true
+    }
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        toolBar.isHidden = false
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            toolBar.snp.updateConstraints {
+                $0.bottom.equalToSuperview().offset(-keyboardSize.height)
+            }
+            view.layoutIfNeeded()
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        toolBar.snp.updateConstraints {
+            $0.bottom.equalToSuperview()
+        }
+        view.layoutIfNeeded()
+    }
 
     private let actualItemCount = 4
     private let DiaryList: [String] = ["a", "b", "c", "d"]
@@ -36,6 +60,9 @@ class NewDiaryEntryViewController: UIViewController {
         view.backgroundColor = .white
         setupConstrains()
         collectionView.collectionViewLayout = createCollectionViewLayout()
+        setupToolBar()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -53,6 +80,25 @@ class NewDiaryEntryViewController: UIViewController {
         collectionView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.top.bottom.equalToSuperview()
+
+    private func setupToolBar() {
+        let spacer = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil, action: nil
+        )
+        let saveButton = UIBarButtonItem(
+            barButtonSystemItem: .save,
+            target: self,
+            action: #selector(saveButtonTapped)
+        )
+        toolBar.items = [spacer, saveButton]
+        toolBar.sizeToFit()
+        toolBar.isHidden = true
+
+        view.addSubview(toolBar)
+        toolBar.translatesAutoresizingMaskIntoConstraints = false
+        toolBar.snp.makeConstraints {
+            $0.left.right.bottom.equalToSuperview()
         }
     }
 
