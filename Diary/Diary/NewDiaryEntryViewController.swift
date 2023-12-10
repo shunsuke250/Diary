@@ -19,8 +19,9 @@ class NewDiaryEntryViewController: UIViewController {
         return $0
     }(UIDatePicker())
 
-    private let addDiaryButton: UIButton = {
-        $0.titleLabel?.text = "追加"
+    private let closeModalViewButton: UIButton = {
+        $0.setImage(.init(systemName: "xmark"), for: .normal)
+        $0.tintColor = .white
         return $0
     }(UIButton())
 
