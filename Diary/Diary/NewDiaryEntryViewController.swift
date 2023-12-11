@@ -13,9 +13,18 @@ class NewDiaryEntryViewController: UIViewController {
         collectionViewLayout: createCollectionViewLayout()
     )
 
+    private let customNavigationBar: UIView = {
+        $0.backgroundColor = .systemBlue
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UIView())
+
     private let toolBar = UIToolbar()
 
     private let diaryDatePicker: UIDatePicker = {
+        $0.datePickerMode = .date
+        $0.locale = Locale(identifier: "ja_JP")
+        $0.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         return $0
     }(UIDatePicker())
 
@@ -45,6 +54,15 @@ class NewDiaryEntryViewController: UIViewController {
             $0.bottom.equalToSuperview()
         }
         view.layoutIfNeeded()
+    }
+
+    @objc func dateChanged(_ sender: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ja_JP")
+        formatter.dateFormat = "MM月dd日（E）" // "12月21日（水）"の形式
+        let dateString = formatter.string(from: sender.date)
+
+        print(dateString) // 変換された日付を表示
     }
 
     private let actualItemCount = 4
