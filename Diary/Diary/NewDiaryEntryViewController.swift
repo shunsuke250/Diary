@@ -8,6 +8,11 @@
 import UIKit
 
 class NewDiaryEntryViewController: UIViewController {
+    private lazy var parentStackView: UIStackView = {
+        $0.axis = .vertical
+        return $0
+    }(UIStackView(arrangedSubviews: [customNavigationBar, collectionView]))
+
     private lazy var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: createCollectionViewLayout()
@@ -93,12 +98,26 @@ class NewDiaryEntryViewController: UIViewController {
     }
 
     private func setupConstrains() {
-        view.addSubview(collectionView)
+        view.addSubview(parentStackView)
+        customNavigationBar.addSubview(closeModalViewButton)
+        customNavigationBar.addSubview(diaryDatePicker)
 
-        collectionView.snp.makeConstraints {
-            $0.width.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        parentStackView.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
+
+        }
+
+        customNavigationBar.snp.makeConstraints {
+            $0.height.equalTo(44)
+        }
+
+        closeModalViewButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.left.equalToSuperview().offset(10)
+        }
+
+        diaryDatePicker.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 
