@@ -29,7 +29,7 @@ class NewDiaryEntryViewController: UIViewController {
     private let diaryDatePicker: UIDatePicker = {
         $0.datePickerMode = .date
         $0.locale = Locale(identifier: "ja_JP")
-        $0.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+        $0.addTarget(NewDiaryEntryViewController.self, action: #selector(dateChanged(_:)), for: .valueChanged)
         return $0
     }(UIDatePicker())
 
