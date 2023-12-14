@@ -8,19 +8,34 @@
 import UIKit
 
 class NewDiaryEntryViewController: UIViewController {
+    private lazy var parentStackView: UIStackView = {
+        $0.axis = .vertical
+        return $0
+    }(UIStackView(arrangedSubviews: [customNavigationBar, collectionView]))
+
     private lazy var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: createCollectionViewLayout()
     )
 
+    private let customNavigationBar: UIView = {
+        $0.backgroundColor = .systemBlue
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UIView())
+
     private let toolBar = UIToolbar()
 
     private let diaryDatePicker: UIDatePicker = {
+        $0.datePickerMode = .date
+        $0.locale = Locale(identifier: "ja_JP")
+        $0.addTarget(NewDiaryEntryViewController.self, action: #selector(dateChanged(_:)), for: .valueChanged)
         return $0
     }(UIDatePicker())
 
-    private let addDiaryButton: UIButton = {
-        $0.titleLabel?.text = "追加"
+    private let closeModalViewButton: UIButton = {
+        $0.setImage(.init(systemName: "xmark"), for: .normal)
+        $0.tintColor = .white
         return $0
     }(UIButton())
 
@@ -44,6 +59,15 @@ class NewDiaryEntryViewController: UIViewController {
             $0.bottom.equalToSuperview()
         }
         view.layoutIfNeeded()
+    }
+
+    @objc func dateChanged(_ sender: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ja_JP")
+        formatter.dateFormat = "MM月dd日（E）" // "12月21日（水）"の形式
+        let dateString = formatter.string(from: sender.date)
+
+        print(dateString) // 変換された日付を表示
     }
 
     private let actualItemCount = 4
@@ -74,12 +98,26 @@ class NewDiaryEntryViewController: UIViewController {
     }
 
     private func setupConstrains() {
-        view.addSubview(collectionView)
+        view.addSubview(parentStackView)
+        customNavigationBar.addSubview(closeModalViewButton)
+        customNavigationBar.addSubview(diaryDatePicker)
 
-        collectionView.snp.makeConstraints {
-            $0.width.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        parentStackView.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
+
+        }
+
+        customNavigationBar.snp.makeConstraints {
+            $0.height.equalTo(44)
+        }
+
+        closeModalViewButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.left.equalToSuperview().offset(10)
+        }
+
+        diaryDatePicker.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 
