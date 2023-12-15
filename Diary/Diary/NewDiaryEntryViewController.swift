@@ -75,13 +75,12 @@ class NewDiaryEntryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.delegate = self
+        view.backgroundColor = .white
         collectionView.dataSource = self
         collectionView.register(
             TextViewCollectionViewCell.self,
             forCellWithReuseIdentifier: "cell"
         )
-        view.backgroundColor = .white
         setupConstrains()
         collectionView.collectionViewLayout = createCollectionViewLayout()
         setupToolBar()
@@ -104,7 +103,6 @@ class NewDiaryEntryViewController: UIViewController {
 
         parentStackView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
-
         }
 
         customNavigationBar.snp.makeConstraints {
@@ -159,9 +157,6 @@ class NewDiaryEntryViewController: UIViewController {
 
         return layout
     }
-}
-
-extension NewDiaryEntryViewController: UICollectionViewDelegate {
 }
 
 extension NewDiaryEntryViewController: UICollectionViewDataSource {
