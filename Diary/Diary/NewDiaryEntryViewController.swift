@@ -19,7 +19,7 @@ class NewDiaryEntryViewController: UIViewController {
     )
 
     private let customNavigationBar: UIView = {
-        $0.backgroundColor = .systemBlue
+        $0.backgroundColor = Color.yellow
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIView())
@@ -41,7 +41,7 @@ class NewDiaryEntryViewController: UIViewController {
 
     private let closeModalViewButton: UIButton = {
         $0.setImage(.init(systemName: "xmark"), for: .normal)
-        $0.tintColor = .white
+        $0.tintColor = Color.black
         return $0
     }(UIButton())
 
@@ -72,7 +72,7 @@ class NewDiaryEntryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = Color.yellow
         collectionView.dataSource = self
         collectionView.register(
             TextViewCollectionViewCell.self,
