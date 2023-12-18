@@ -19,7 +19,7 @@ class NewDiaryEntryViewController: UIViewController {
     )
 
     private let customNavigationBar: UIView = {
-        $0.backgroundColor = .systemBlue
+        $0.backgroundColor = Color.yellow
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIView())
@@ -29,13 +29,19 @@ class NewDiaryEntryViewController: UIViewController {
     private let diaryDatePicker: UIDatePicker = {
         $0.datePickerMode = .date
         $0.locale = Locale(identifier: "ja_JP")
-        $0.addTarget(NewDiaryEntryViewController.self, action: #selector(dateChanged(_:)), for: .valueChanged)
         return $0
     }(UIDatePicker())
 
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ja_JP")
+        formatter.dateFormat = "MM月dd日（E）" // "12月21日（水）"の形式
+        return formatter
+    }()
+
     private let closeModalViewButton: UIButton = {
         $0.setImage(.init(systemName: "xmark"), for: .normal)
-        $0.tintColor = .white
+        $0.tintColor = Color.black
         return $0
     }(UIButton())
 
@@ -61,29 +67,20 @@ class NewDiaryEntryViewController: UIViewController {
         view.layoutIfNeeded()
     }
 
-    @objc func dateChanged(_ sender: UIDatePicker) {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ja_JP")
-        formatter.dateFormat = "MM月dd日（E）" // "12月21日（水）"の形式
-        let dateString = formatter.string(from: sender.date)
-
-        print(dateString) // 変換された日付を表示
-    }
-
     private let actualItemCount = 4
     private let DiaryList: [String] = ["a", "b", "c", "d"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.delegate = self
+        view.backgroundColor = Color.yellow
         collectionView.dataSource = self
         collectionView.register(
             TextViewCollectionViewCell.self,
             forCellWithReuseIdentifier: "cell"
         )
-        view.backgroundColor = .white
-        setupConstrains()
         collectionView.collectionViewLayout = createCollectionViewLayout()
+        setupConstrains()
+        setupActions()
         setupToolBar()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -104,7 +101,6 @@ class NewDiaryEntryViewController: UIViewController {
 
         parentStackView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
-
         }
 
         customNavigationBar.snp.makeConstraints {
@@ -113,12 +109,25 @@ class NewDiaryEntryViewController: UIViewController {
 
         closeModalViewButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.left.equalToSuperview().offset(10)
+            $0.left.equalToSuperview().offset(15)
         }
 
         diaryDatePicker.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
+    }
+
+    private func setupActions() {
+        diaryDatePicker.addAction(UIAction { [weak self] action in
+            guard let self = self else { return }
+            let selectedDate = self.diaryDatePicker.date
+            let dateString = self.dateFormatter.string(from: selectedDate)
+            print(dateString)  // 変換された日付を表示
+        }, for: .valueChanged)
+
+        closeModalViewButton.addAction(UIAction { [weak self] _ in
+            self?.dismiss(animated: true, completion: nil)
+        }, for: .touchUpInside)
     }
 
     private func setupToolBar() {
@@ -159,9 +168,6 @@ class NewDiaryEntryViewController: UIViewController {
 
         return layout
     }
-}
-
-extension NewDiaryEntryViewController: UICollectionViewDelegate {
 }
 
 extension NewDiaryEntryViewController: UICollectionViewDataSource {
