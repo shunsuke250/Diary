@@ -109,7 +109,7 @@ class NewDiaryEntryViewController: UIViewController {
 
         closeModalViewButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.left.equalToSuperview().offset(10)
+            $0.left.equalToSuperview().offset(15)
         }
 
         diaryDatePicker.snp.makeConstraints {
