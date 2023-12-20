@@ -45,6 +45,12 @@ class NewDiaryEntryViewController: UIViewController {
         return $0
     }(UIButton())
 
+    private let saveButton: UIButton = {
+        $0.setImage(.init(systemName: "checkmark.circle"), for: .normal)
+        $0.tintColor = Color.black
+        return $0
+    }(UIButton())
+
     @objc func doneButtonPressed() {
         self.view.endEditing(true)
         toolBar.isHidden = true
@@ -98,6 +104,7 @@ class NewDiaryEntryViewController: UIViewController {
         view.addSubview(parentStackView)
         customNavigationBar.addSubview(closeModalViewButton)
         customNavigationBar.addSubview(diaryDatePicker)
+        customNavigationBar.addSubview(saveButton)
 
         parentStackView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
@@ -114,6 +121,11 @@ class NewDiaryEntryViewController: UIViewController {
 
         diaryDatePicker.snp.makeConstraints {
             $0.center.equalToSuperview()
+        }
+
+        saveButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.right.equalToSuperview().inset(15)
         }
     }
 
