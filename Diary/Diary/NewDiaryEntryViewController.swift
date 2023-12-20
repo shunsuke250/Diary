@@ -45,7 +45,7 @@ class NewDiaryEntryViewController: UIViewController {
         return $0
     }(UIButton())
 
-    @objc func saveButtonTapped() {
+    @objc func doneButtonPressed() {
         self.view.endEditing(true)
         toolBar.isHidden = true
     }
@@ -135,12 +135,12 @@ class NewDiaryEntryViewController: UIViewController {
             barButtonSystemItem: .flexibleSpace,
             target: nil, action: nil
         )
-        let saveButton = UIBarButtonItem(
-            barButtonSystemItem: .save,
+        let doneButton = UIBarButtonItem(
+            barButtonSystemItem: .done,
             target: self,
-            action: #selector(saveButtonTapped)
+            action: #selector(doneButtonPressed)
         )
-        toolBar.items = [spacer, saveButton]
+        toolBar.items = [spacer, doneButton]
         toolBar.sizeToFit()
         toolBar.isHidden = true
 
