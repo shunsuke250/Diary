@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NewDiaryEntryViewController: UIViewController {
+final class NewDiaryEntryViewController: UIViewController {
     private lazy var parentStackView: UIStackView = {
         $0.axis = .vertical
         return $0

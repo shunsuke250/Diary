@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     private let tableView = UITableView()
 
     private let addButton: UIButton = {
