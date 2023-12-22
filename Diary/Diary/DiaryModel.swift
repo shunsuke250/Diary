@@ -6,6 +6,13 @@
 //
 
 import Foundation
+struct DiaryModelObject {
+    var year: Int // 年
+    var month: Int // 月
+    var day: Int // 日
+    var weekday: String // 曜日
+    var content: String // 日記
+}
 
 struct DiaryModel {
     var date: Date
