@@ -59,5 +59,10 @@ class DiaryTableViewCell: UITableViewCell {
             $0.top.left.equalToSuperview().offset(10)
             $0.bottom.right.equalToSuperview().inset(10)
         }
+
+        verticalStackView.snp.makeConstraints {
+            $0.width.equalTo(30)
+        }
+    }
     }
 }
