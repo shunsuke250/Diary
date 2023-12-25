@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CoreData
+
 struct DiaryModelObject {
     var year: Int // 年
     var month: Int // 月
@@ -15,6 +17,23 @@ struct DiaryModelObject {
 }
 
 struct DiaryModel {
-    var date: Date
-    var contents: String
+    static func saveDiary(date: Date, content: String) {
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        context.perform {
+            // 新しいDiaryEntryインスタンスの作成
+            guard let newEntry = NSEntityDescription.insertNewObject(
+                forEntityName: "Diary", into: context
+            ) as? Diary else {
+                return
+            }
+            newEntry.date = date
+            newEntry.content = content
+
+            do {
+                try context.save()
+            } catch let error as NSError {
+                print("保存に失敗: \(error), \(error.userInfo)")
+            }
+        }
+    }
 }
