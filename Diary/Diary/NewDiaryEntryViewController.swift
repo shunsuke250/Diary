@@ -140,6 +140,28 @@ final class NewDiaryEntryViewController: UIViewController {
         closeModalViewButton.addAction(UIAction { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }, for: .touchUpInside)
+
+        saveButton.addAction(UIAction { [weak self] _ in
+            guard let self = self else { return }
+
+            // 現在アクティブなセルのインデックスパスを取得
+            let visibleRect = CGRect(origin: self.collectionView.contentOffset, size: self.collectionView.bounds.size)
+            let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+            guard let visibleIndexPath = self.collectionView.indexPathForItem(at: visiblePoint) else { return }
+
+            // セルを取得
+            guard let cell = self.collectionView.cellForItem(at: visibleIndexPath) as? TextViewCollectionViewCell else {
+                return
+            }
+
+            let content = cell.textContent
+
+            let selectedDate = self.diaryDatePicker.date
+            // CoreDataに保存
+            DiaryModel.saveDiary(date: selectedDate, content: content)
+
+            self.dismiss(animated: true, completion: nil)
+        }, for: .touchUpInside)
     }
 
     private func setupToolBar() {
