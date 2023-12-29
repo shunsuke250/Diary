@@ -15,6 +15,10 @@ final class TextViewCollectionViewCell: UICollectionViewCell {
         return $0
     }(UITextView())
 
+    var textContent: String {
+        return textView.text
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()

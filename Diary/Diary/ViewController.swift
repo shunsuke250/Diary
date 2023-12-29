@@ -22,6 +22,8 @@ final class ViewController: UIViewController {
         return $0
     }(UIButton())
 
+    private var diaryContents: [DiaryModelObject]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -29,6 +31,12 @@ final class ViewController: UIViewController {
         tableView.register(DiaryTableViewCell.self, forCellReuseIdentifier: "cell")
         title = "日記一覧"
         setup()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        diaryContents = DiaryModel.fetchDiary()
+        tableView.reloadData()
     }
 
     private func setup() {
@@ -61,7 +69,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        10
+        diaryContents?.count ?? 0
     }
 
     func tableView(
@@ -70,6 +78,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? DiaryTableViewCell else {
             return UITableViewCell()
+        }
+        if let diary = diaryContents?[indexPath.row] {
+            cell.configure(day: diary.day, weekday: diary.weekday, content: diary.content)
         }
 
         return cell

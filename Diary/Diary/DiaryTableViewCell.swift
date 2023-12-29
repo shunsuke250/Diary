@@ -61,8 +61,13 @@ class DiaryTableViewCell: UITableViewCell {
         }
 
         verticalStackView.snp.makeConstraints {
-            $0.width.equalTo(30)
+            $0.width.equalTo(40)
         }
     }
+
+    func configure(day: Int, weekday: String, content: String) {
+        dayLabel.text = "\(day)"
+        weekdayLabel.text = weekday
+        diaryContentLabel.text = content
     }
 }
