@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB6FA0492B30745400C6682C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AB6FA0472B30745400C6682C /* Model.xcdatamodeld */; };
+		AB6FA04C2B3076AC00C6682C /* Diary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6FA04A2B3076AC00C6682C /* Diary+CoreDataClass.swift */; };
+		AB6FA04D2B3076AC00C6682C /* Diary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6FA04B2B3076AC00C6682C /* Diary+CoreDataProperties.swift */; };
+		AB6FA04F2B3076CD00C6682C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6FA04E2B3076CD00C6682C /* CoreDataManager.swift */; };
 		ABA00BFB2B12E3FB007EE2EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA00BFA2B12E3FB007EE2EB /* AppDelegate.swift */; };
 		ABA00BFD2B12E3FB007EE2EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA00BFC2B12E3FB007EE2EB /* SceneDelegate.swift */; };
 		ABA00BFF2B12E3FB007EE2EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA00BFE2B12E3FB007EE2EB /* ViewController.swift */; };
@@ -22,6 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB6FA0482B30745400C6682C /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		AB6FA04A2B3076AC00C6682C /* Diary+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Diary+CoreDataClass.swift"; path = "Diary/Diary+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AB6FA04B2B3076AC00C6682C /* Diary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Diary+CoreDataProperties.swift"; path = "Diary/Diary+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AB6FA04E2B3076CD00C6682C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		ABA00BF72B12E3FB007EE2EB /* Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA00BFA2B12E3FB007EE2EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABA00BFC2B12E3FB007EE2EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +60,8 @@
 		ABA00BEE2B12E3FB007EE2EB = {
 			isa = PBXGroup;
 			children = (
+				AB6FA04A2B3076AC00C6682C /* Diary+CoreDataClass.swift */,
+				AB6FA04B2B3076AC00C6682C /* Diary+CoreDataProperties.swift */,
 				ABA00BF92B12E3FB007EE2EB /* Diary */,
 				ABA00BF82B12E3FB007EE2EB /* Products */,
 			);
@@ -75,8 +85,10 @@
 				ABA00C1B2B1A0B49007EE2EB /* NewDiaryEntryViewController.swift */,
 				ABA00C192B13032C007EE2EB /* DiaryModel.swift */,
 				ABA00C172B12F0D8007EE2EB /* DiaryTableViewCell.swift */,
+				AB6FA04E2B3076CD00C6682C /* CoreDataManager.swift */,
 				ABA00C132B12EA6F007EE2EB /* UIConstants.swift */,
 				ABA00C032B12E3FD007EE2EB /* Assets.xcassets */,
+				AB6FA0472B30745400C6682C /* Model.xcdatamodeld */,
 				ABA00C052B12E3FD007EE2EB /* LaunchScreen.storyboard */,
 				ABA00C082B12E3FD007EE2EB /* Info.plist */,
 			);
@@ -162,9 +174,13 @@
 			files = (
 				ABA00BFF2B12E3FB007EE2EB /* ViewController.swift in Sources */,
 				ABA00C1A2B13032C007EE2EB /* DiaryModel.swift in Sources */,
+				AB6FA04D2B3076AC00C6682C /* Diary+CoreDataProperties.swift in Sources */,
 				ABA00C182B12F0D8007EE2EB /* DiaryTableViewCell.swift in Sources */,
+				AB6FA04C2B3076AC00C6682C /* Diary+CoreDataClass.swift in Sources */,
 				ABA00BFB2B12E3FB007EE2EB /* AppDelegate.swift in Sources */,
+				AB6FA04F2B3076CD00C6682C /* CoreDataManager.swift in Sources */,
 				ABA00C202B2407D7007EE2EB /* TextViewCollectionViewCell.swift in Sources */,
+				AB6FA0492B30745400C6682C /* Model.xcdatamodeld in Sources */,
 				ABA00BFD2B12E3FB007EE2EB /* SceneDelegate.swift in Sources */,
 				ABA00C142B12EA6F007EE2EB /* UIConstants.swift in Sources */,
 				ABA00C1C2B1A0B49007EE2EB /* NewDiaryEntryViewController.swift in Sources */,
@@ -406,6 +422,19 @@
 			productName = "SnapKit-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		AB6FA0472B30745400C6682C /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AB6FA0482B30745400C6682C /* Model.xcdatamodel */,
+			);
+			currentVersion = AB6FA0482B30745400C6682C /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = ABA00BEF2B12E3FB007EE2EB /* Project object */;
 }
