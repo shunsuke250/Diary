@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NewDiaryEntryViewController: UIViewController {
+final class NewDiaryEntryViewController: UIViewController {
     private lazy var parentStackView: UIStackView = {
         $0.axis = .vertical
         return $0
@@ -45,7 +45,13 @@ class NewDiaryEntryViewController: UIViewController {
         return $0
     }(UIButton())
 
-    @objc func saveButtonTapped() {
+    private let saveButton: UIButton = {
+        $0.setImage(.init(systemName: "checkmark.circle"), for: .normal)
+        $0.tintColor = Color.black
+        return $0
+    }(UIButton())
+
+    @objc func doneButtonPressed() {
         self.view.endEditing(true)
         toolBar.isHidden = true
     }
@@ -98,6 +104,7 @@ class NewDiaryEntryViewController: UIViewController {
         view.addSubview(parentStackView)
         customNavigationBar.addSubview(closeModalViewButton)
         customNavigationBar.addSubview(diaryDatePicker)
+        customNavigationBar.addSubview(saveButton)
 
         parentStackView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
@@ -115,6 +122,11 @@ class NewDiaryEntryViewController: UIViewController {
         diaryDatePicker.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
+
+        saveButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.right.equalToSuperview().inset(15)
+        }
     }
 
     private func setupActions() {
@@ -128,6 +140,28 @@ class NewDiaryEntryViewController: UIViewController {
         closeModalViewButton.addAction(UIAction { [weak self] _ in
             self?.dismiss(animated: true, completion: nil)
         }, for: .touchUpInside)
+
+        saveButton.addAction(UIAction { [weak self] _ in
+            guard let self = self else { return }
+
+            // 現在アクティブなセルのインデックスパスを取得
+            let visibleRect = CGRect(origin: self.collectionView.contentOffset, size: self.collectionView.bounds.size)
+            let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+            guard let visibleIndexPath = self.collectionView.indexPathForItem(at: visiblePoint) else { return }
+
+            // セルを取得
+            guard let cell = self.collectionView.cellForItem(at: visibleIndexPath) as? TextViewCollectionViewCell else {
+                return
+            }
+
+            let content = cell.textContent
+
+            let selectedDate = self.diaryDatePicker.date
+            // CoreDataに保存
+            DiaryModel.saveDiary(date: selectedDate, content: content)
+
+            self.dismiss(animated: true, completion: nil)
+        }, for: .touchUpInside)
     }
 
     private func setupToolBar() {
@@ -135,12 +169,12 @@ class NewDiaryEntryViewController: UIViewController {
             barButtonSystemItem: .flexibleSpace,
             target: nil, action: nil
         )
-        let saveButton = UIBarButtonItem(
-            barButtonSystemItem: .save,
+        let doneButton = UIBarButtonItem(
+            barButtonSystemItem: .done,
             target: self,
-            action: #selector(saveButtonTapped)
+            action: #selector(doneButtonPressed)
         )
-        toolBar.items = [spacer, saveButton]
+        toolBar.items = [spacer, doneButton]
         toolBar.sizeToFit()
         toolBar.isHidden = true
 
