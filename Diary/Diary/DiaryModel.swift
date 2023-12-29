@@ -41,6 +41,10 @@ struct DiaryModel {
         let context = CoreDataManager.shared.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<Diary> = Diary.fetchRequest()
 
+        // 日付で降順にソートする
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(Diary.date), ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
         do {
             let diaryEntries = try context.fetch(fetchRequest)
             return diaryFormat(data: diaryEntries)
