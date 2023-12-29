@@ -80,6 +80,7 @@ final class NewDiaryEntryViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Color.yellow
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(
             TextViewCollectionViewCell.self,
             forCellWithReuseIdentifier: "cell"
@@ -224,5 +225,13 @@ extension NewDiaryEntryViewController: UICollectionViewDataSource {
         cell.configure(item: data) // セルにデータを設定
 
         return cell
+    }
+}
+
+extension NewDiaryEntryViewController: UICollectionViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageIndex = round(scrollView.contentOffset.x / scrollView.frame.width)
+        // TODO: 縦スクロールで判定される問題を修正する
+        print("現在のページ: \(pageIndex)")
     }
 }
