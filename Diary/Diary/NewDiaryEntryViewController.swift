@@ -142,22 +142,27 @@ final class NewDiaryEntryViewController: UIViewController {
             self?.dismiss(animated: true, completion: nil)
         }, for: .touchUpInside)
 
-        saveButton.addAction(UIAction { [weak self] _ in
-            guard let self = self else { return }
+        saveButton.addAction(UIAction {
+            [weak self] _ in
+
+            guard let self else {
+                return
+            }
 
             // 現在アクティブなセルのインデックスパスを取得
             let visibleRect = CGRect(origin: self.collectionView.contentOffset, size: self.collectionView.bounds.size)
             let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-            guard let visibleIndexPath = self.collectionView.indexPathForItem(at: visiblePoint) else { return }
 
-            // セルを取得
-            guard let cell = self.collectionView.cellForItem(at: visibleIndexPath) as? TextViewCollectionViewCell else {
+            guard
+                let visibleIndexPath = self.collectionView.indexPathForItem(at: visiblePoint),
+                let cell = self.collectionView.cellForItem(at: visibleIndexPath) as? TextViewCollectionViewCell,
+                !cell.textContent.isEmpty
+            else {
                 return
             }
 
-            let content = cell.textContent
-
             let selectedDate = self.diaryDatePicker.date
+            let content = cell.textContent
             // CoreDataに保存
             DiaryModel.saveDiary(date: selectedDate, content: content)
 
