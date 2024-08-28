@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB5C61652C7F5E2B00D74372 /* HolidayJp in Frameworks */ = {isa = PBXBuildFile; productRef = AB5C61642C7F5E2B00D74372 /* HolidayJp */; };
 		AB6FA0492B30745400C6682C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AB6FA0472B30745400C6682C /* Model.xcdatamodeld */; };
 		AB6FA04C2B3076AC00C6682C /* Diary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6FA04A2B3076AC00C6682C /* Diary+CoreDataClass.swift */; };
 		AB6FA04D2B3076AC00C6682C /* Diary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6FA04B2B3076AC00C6682C /* Diary+CoreDataProperties.swift */; };
@@ -51,6 +52,7 @@
 			files = (
 				ABA00C102B12E4DE007EE2EB /* SnapKit in Frameworks */,
 				ABA00C122B12E4DE007EE2EB /* SnapKit-Dynamic in Frameworks */,
+				AB5C61652C7F5E2B00D74372 /* HolidayJp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +116,7 @@
 			packageProductDependencies = (
 				ABA00C0F2B12E4DE007EE2EB /* SnapKit */,
 				ABA00C112B12E4DE007EE2EB /* SnapKit-Dynamic */,
+				AB5C61642C7F5E2B00D74372 /* HolidayJp */,
 			);
 			productName = Diary;
 			productReference = ABA00BF72B12E3FB007EE2EB /* Diary.app */;
@@ -145,6 +148,7 @@
 			mainGroup = ABA00BEE2B12E3FB007EE2EB;
 			packageReferences = (
 				ABA00C0E2B12E4DE007EE2EB /* XCRemoteSwiftPackageReference "SnapKit" */,
+				AB5C61632C7F5E2B00D74372 /* XCRemoteSwiftPackageReference "holiday_jp-swift" */,
 			);
 			productRefGroup = ABA00BF82B12E3FB007EE2EB /* Products */;
 			projectDirPath = "";
@@ -400,6 +404,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AB5C61632C7F5E2B00D74372 /* XCRemoteSwiftPackageReference "holiday_jp-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/holiday-jp/holiday_jp-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.1;
+			};
+		};
 		ABA00C0E2B12E4DE007EE2EB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -411,6 +423,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AB5C61642C7F5E2B00D74372 /* HolidayJp */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB5C61632C7F5E2B00D74372 /* XCRemoteSwiftPackageReference "holiday_jp-swift" */;
+			productName = HolidayJp;
+		};
 		ABA00C0F2B12E4DE007EE2EB /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ABA00C0E2B12E4DE007EE2EB /* XCRemoteSwiftPackageReference "SnapKit" */;
