@@ -9,11 +9,16 @@ import Foundation
 import CoreData
 
 struct DiaryModelObject {
-    var year: Int // 年
-    var month: Int // 月
-    var day: Int // 日
-    var weekday: Weekday // 曜日
-    var content: String // 日記
+    /// 年
+    var year: Int
+    /// 月
+    var month: Int
+    /// 日
+    var day: Int
+    /// 曜日
+    var weekday: Weekday
+    /// 内容
+    var content: String
 }
 
 struct DiaryModel {
