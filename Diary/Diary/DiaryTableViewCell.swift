@@ -65,9 +65,19 @@ class DiaryTableViewCell: UITableViewCell {
         }
     }
 
-    func configure(day: Int, weekday: String, content: String) {
-        dayLabel.text = "\(day)"
-        weekdayLabel.text = weekday
+    func configure(day: String, weekday: Weekday, content: String) {
+        dayLabel.attributedText = .init(
+            string: day,
+            attributes: [
+                .foregroundColor: weekday.color
+            ]
+        )
+        weekdayLabel.attributedText = NSAttributedString(
+            string: "\(weekday.displayName)曜日",
+            attributes: [
+                .foregroundColor: weekday.color
+            ]
+        )
         diaryContentLabel.text = content
     }
 }

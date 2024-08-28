@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 
+/// 日記一覧画面
 final class ViewController: UIViewController {
     private let tableView = UITableView()
 
@@ -22,7 +23,7 @@ final class ViewController: UIViewController {
         return $0
     }(UIButton())
 
-    private var diaryContents: [DiaryModelObject]?
+    private var diaryContents: [DiaryModelObject] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +70,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        diaryContents?.count ?? 0
+        diaryContents.count
     }
 
     func tableView(
@@ -82,9 +83,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         ) as? DiaryTableViewCell else {
             return UITableViewCell()
         }
-        if let diary = diaryContents?[indexPath.row] {
-            cell.configure(day: diary.day, weekday: diary.weekday, content: diary.content)
-        }
+        let diary = diaryContents[indexPath.row]
+        cell.configure(day: String(diary.day), weekday: diary.weekday, content: diary.content)
 
         return cell
     }
