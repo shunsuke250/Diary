@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AB5C61652C7F5E2B00D74372 /* HolidayJp in Frameworks */ = {isa = PBXBuildFile; productRef = AB5C61642C7F5E2B00D74372 /* HolidayJp */; };
 		AB5C61672C7F658900D74372 /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C61662C7F658900D74372 /* Weekday.swift */; };
+		AB5C61692C91DAAF00D74372 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5C61682C91DAAF00D74372 /* Extension.swift */; };
 		AB6FA0492B30745400C6682C /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AB6FA0472B30745400C6682C /* Model.xcdatamodeld */; };
 		AB6FA04C2B3076AC00C6682C /* Diary+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6FA04A2B3076AC00C6682C /* Diary+CoreDataClass.swift */; };
 		AB6FA04D2B3076AC00C6682C /* Diary+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6FA04B2B3076AC00C6682C /* Diary+CoreDataProperties.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		AB5C61662C7F658900D74372 /* Weekday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
+		AB5C61682C91DAAF00D74372 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		AB6FA0482B30745400C6682C /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		AB6FA04A2B3076AC00C6682C /* Diary+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Diary+CoreDataClass.swift"; path = "Diary/Diary+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AB6FA04B2B3076AC00C6682C /* Diary+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Diary+CoreDataProperties.swift"; path = "Diary/Diary+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				ABA00C1F2B2407D7007EE2EB /* TextViewCollectionViewCell.swift */,
 				ABA00BFC2B12E3FB007EE2EB /* SceneDelegate.swift */,
 				ABA00BFE2B12E3FB007EE2EB /* ViewController.swift */,
+				AB5C61682C91DAAF00D74372 /* Extension.swift */,
 				ABA00C1B2B1A0B49007EE2EB /* NewDiaryEntryViewController.swift */,
 				ABA00C192B13032C007EE2EB /* DiaryModel.swift */,
 				ABA00C172B12F0D8007EE2EB /* DiaryTableViewCell.swift */,
@@ -188,6 +191,7 @@
 				AB6FA04F2B3076CD00C6682C /* CoreDataManager.swift in Sources */,
 				ABA00C202B2407D7007EE2EB /* TextViewCollectionViewCell.swift in Sources */,
 				AB5C61672C7F658900D74372 /* Weekday.swift in Sources */,
+				AB5C61692C91DAAF00D74372 /* Extension.swift in Sources */,
 				AB6FA0492B30745400C6682C /* Model.xcdatamodeld in Sources */,
 				ABA00BFD2B12E3FB007EE2EB /* SceneDelegate.swift in Sources */,
 				ABA00C142B12EA6F007EE2EB /* UIConstants.swift in Sources */,
