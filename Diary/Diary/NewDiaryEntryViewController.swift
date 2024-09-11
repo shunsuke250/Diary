@@ -8,69 +8,43 @@
 import UIKit
 
 final class NewDiaryEntryViewController: UIViewController {
-    private lazy var parentStackView: UIStackView = {
-        $0.axis = .vertical
-        return $0
-    }(UIStackView(arrangedSubviews: [customNavigationBar, collectionView]))
-
     private lazy var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: createCollectionViewLayout()
     )
 
-    private let customNavigationBar: UIView = {
-        $0.backgroundColor = Color.yellow
+    private let customNavigationBar = UIView().apply {
+        $0.backgroundColor = .yellow
         $0.translatesAutoresizingMaskIntoConstraints = false
-        return $0
-    }(UIView())
+    }
+
+    private lazy var parentStackView = UIStackView(arrangedSubviews: [
+        customNavigationBar,
+        collectionView
+    ]).apply {
+        $0.axis = .vertical
+    }
 
     private let toolBar = UIToolbar()
 
-    private let diaryDatePicker: UIDatePicker = {
+    private let diaryDatePicker = UIDatePicker().apply {
         $0.datePickerMode = .date
         $0.locale = Locale(identifier: "ja_JP")
-        return $0
-    }(UIDatePicker())
+    }
 
-    private let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ja_JP")
-        formatter.dateFormat = "MM月dd日（E）" // "12月21日（水）"の形式
-        return formatter
-    }()
+    private let dateFormatter = DateFormatter().apply {
+        $0.locale = Locale(identifier: "ja_JP")
+        $0.dateFormat = "MM月dd日（E）" // "12月21日（水）"の形式
+    }
 
-    private let closeModalViewButton: UIButton = {
+    private let closeModalViewButton = UIButton().apply {
         $0.setImage(.init(systemName: "xmark"), for: .normal)
-        $0.tintColor = Color.black
-        return $0
-    }(UIButton())
+        $0.tintColor = .black
+    }
 
-    private let saveButton: UIButton = {
+    private let saveButton = UIButton().apply {
         $0.setImage(.init(systemName: "checkmark.circle"), for: .normal)
-        $0.tintColor = Color.black
-        return $0
-    }(UIButton())
-
-    @objc func doneButtonPressed() {
-        self.view.endEditing(true)
-        toolBar.isHidden = true
-    }
-
-    @objc func keyboardWillShow(notification: NSNotification) {
-        toolBar.isHidden = false
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            toolBar.snp.updateConstraints {
-                $0.bottom.equalToSuperview().offset(-keyboardSize.height)
-            }
-            view.layoutIfNeeded()
-        }
-    }
-
-    @objc func keyboardWillHide(notification: NSNotification) {
-        toolBar.snp.updateConstraints {
-            $0.bottom.equalToSuperview()
-        }
-        view.layoutIfNeeded()
+        $0.tintColor = .black
     }
 
     private let actualItemCount = 4
@@ -78,13 +52,15 @@ final class NewDiaryEntryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Color.yellow
+
+        view.backgroundColor = .yellow
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(
             TextViewCollectionViewCell.self,
             forCellWithReuseIdentifier: "cell"
         )
+        collectionView.isScrollEnabled = false // 縦方向のスクロールを無効
         collectionView.collectionViewLayout = createCollectionViewLayout()
         setupConstrains()
         setupActions()
@@ -132,7 +108,10 @@ final class NewDiaryEntryViewController: UIViewController {
 
     private func setupActions() {
         diaryDatePicker.addAction(UIAction { [weak self] action in
-            guard let self = self else { return }
+            guard let self else {
+                return
+            }
+
             let selectedDate = self.diaryDatePicker.date
             let dateString = self.dateFormatter.string(from: selectedDate)
             print(dateString)  // 変換された日付を表示
@@ -142,9 +121,7 @@ final class NewDiaryEntryViewController: UIViewController {
             self?.dismiss(animated: true, completion: nil)
         }, for: .touchUpInside)
 
-        saveButton.addAction(UIAction {
-            [weak self] _ in
-
+        saveButton.addAction(UIAction { [weak self] _ in
             guard let self else {
                 return
             }
@@ -207,6 +184,31 @@ final class NewDiaryEntryViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
 
         return layout
+    }
+
+    @objc
+    func doneButtonPressed() {
+        self.view.endEditing(true)
+        toolBar.isHidden = true
+    }
+
+    @objc
+    func keyboardWillShow(notification: NSNotification) {
+        toolBar.isHidden = false
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            toolBar.snp.updateConstraints {
+                $0.bottom.equalToSuperview().offset(-keyboardSize.height)
+            }
+            view.layoutIfNeeded()
+        }
+    }
+
+    @objc
+    func keyboardWillHide(notification: NSNotification) {
+        toolBar.snp.updateConstraints {
+            $0.bottom.equalToSuperview()
+        }
+        view.layoutIfNeeded()
     }
 }
 
