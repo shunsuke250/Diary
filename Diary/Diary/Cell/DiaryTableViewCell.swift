@@ -10,13 +10,13 @@ import UIKit
 class DiaryTableViewCell: UITableViewCell {
     private let dayLabel = UILabel().apply {
         $0.font = .systemFont(ofSize: 26.0, weight: .regular)
-        $0.textColor = Color.black
+        $0.textColor = .appBlack
         $0.text = "26"
     }
 
     private let weekdayLabel = UILabel().apply {
         $0.font = .systemFont(ofSize: 12.0, weight: .regular)
-        $0.textColor = Color.red
+        $0.textColor = .appRed
         $0.text = "日曜日"
     }
 
@@ -76,13 +76,13 @@ class DiaryTableViewCell: UITableViewCell {
         dayLabel.attributedText = .init(
             string: day,
             attributes: [
-                .foregroundColor: weekday.color
+                .foregroundColor: weekday.holidayColor(for: date)
             ]
         )
         weekdayLabel.attributedText = NSAttributedString(
             string: "\(weekday.displayName)曜日",
             attributes: [
-                .foregroundColor: weekday.color(date: date)
+                .foregroundColor: weekday.holidayColor(for: date)
             ]
         )
         diaryContentLabel.text = content

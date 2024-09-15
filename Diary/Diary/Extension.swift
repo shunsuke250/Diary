@@ -5,7 +5,7 @@
 //  Created by 副山俊輔 on 2024/09/11.
 //
 
-import Foundation
+import UIKit
 
 public protocol Chainable {}
 
@@ -33,3 +33,21 @@ public extension Chainable {
 }
 
 extension NSObject: Chainable {}
+
+extension NSObject {
+    class var className: String {
+        return String(describing: self)
+    }
+}
+
+// MARK: - UITableView
+public extension UITableView {
+    func registerCell(_ cellType: UITableViewCell.Type) {
+        let className = cellType.className
+        register(cellType, forCellReuseIdentifier: className)
+    }
+
+    func dequeueReusableCell<T: UITableViewCell>(with type: T.Type, for indexPath: IndexPath) -> T {
+        dequeueReusableCell(withIdentifier: type.className, for: indexPath) as! T
+    }
+}

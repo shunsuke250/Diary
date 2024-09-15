@@ -9,6 +9,8 @@ import Foundation
 import CoreData
 
 struct DiaryModelObject {
+    /// 日時
+    var date: Date
     /// 年
     var year: Int
     /// 月
@@ -23,7 +25,7 @@ struct DiaryModelObject {
 
 struct DiaryModel {
     static func saveDiary(date: Date, content: String) {
-        let context = CoreDataManager.shared.persistentContainer.viewContext
+        let context = CoreDataManager.shared.viewContext
         context.perform {
             // 新しいDiaryEntryインスタンスの作成
             guard let newEntry = NSEntityDescription.insertNewObject(
@@ -43,7 +45,7 @@ struct DiaryModel {
     }
 
     static func fetchDiary() -> [DiaryModelObject] {
-        let context = CoreDataManager.shared.persistentContainer.viewContext
+        let context = CoreDataManager.shared.viewContext
         let fetchRequest: NSFetchRequest<Diary> = Diary.fetchRequest()
 
         // 日付で降順にソートする
@@ -64,23 +66,25 @@ struct DiaryModel {
         calendar.locale = Locale(identifier: "ja_JP")
 
         data.forEach { diary in
-            if let date = diary.date {
-                let year = calendar.component(.year, from: date)
-                let month = calendar.component(.month, from: date)
-                let day = calendar.component(.day, from: date)
-
-                let weekdayIndex = calendar.component(.weekday, from: date)
-                guard let weekday = Weekday(rawValue: weekdayIndex) else {
-                    return
-                }
-
-                let content = diary.content ?? ""
-
-                let diaryModel = DiaryModelObject(
-                    year: year, month: month, day: day, weekday: weekday, content: content
-                )
-                formattedData.append(diaryModel)
+            guard let date = diary.date else {
+                return
             }
+
+            let year = calendar.component(.year, from: date)
+            let month = calendar.component(.month, from: date)
+            let day = calendar.component(.day, from: date)
+
+            let weekdayIndex = calendar.component(.weekday, from: date)
+            guard let weekday = Weekday(rawValue: weekdayIndex) else {
+                return
+            }
+
+            let content = diary.content ?? ""
+            
+            let diaryModel = DiaryModelObject(
+                date: date, year: year, month: month, day: day, weekday: weekday, content: content
+            )
+            formattedData.append(diaryModel)
         }
 
         return formattedData

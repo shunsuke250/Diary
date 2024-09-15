@@ -11,7 +11,7 @@ final class TextViewCollectionViewCell: UICollectionViewCell {
     let textView: UITextView = {
         $0.text = "本文"
         $0.font = .systemFont(ofSize: 16.0, weight: .regular)
-        $0.textColor = Color.black
+        $0.textColor = .appBlack
         return $0
     }(UITextView())
 

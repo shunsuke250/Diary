@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 
 /// 日記一覧画面
-final class ViewController: UIViewController {
+final class DiaryListViewController: UIViewController {
     private let tableView = UITableView()
 
-    private let addButton: UIButton = {
+    private let addButton = UIButton().apply {
         var config = UIButton.Configuration.filled()
         config.image = .init(systemName: "plus")
         config.baseForegroundColor = .appBlack
@@ -20,22 +20,23 @@ final class ViewController: UIViewController {
         config.buttonSize = .medium
         config.cornerStyle = .capsule
         $0.configuration = config
-        return $0
-    }(UIButton())
+    }
 
     private var diaryContents: [DiaryModelObject] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(DiaryTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.registerCell(DiaryTableViewCell.self)
         title = "日記一覧"
         setup()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         diaryContents = DiaryModel.fetchDiary()
         tableView.reloadData()
     }
@@ -59,13 +60,13 @@ final class ViewController: UIViewController {
     }
 
     private func presentNewDiaryEntryViewController() {
-        let newDiaryEntryVC = NewDiaryEntryViewController()
+        let newDiaryEntryVC = CreateDiaryViewController()
         newDiaryEntryVC.modalPresentationStyle = .fullScreen
         present(newDiaryEntryVC, animated: true, completion: nil)
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension DiaryListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
@@ -77,14 +78,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "cell",
-            for: indexPath
-        ) as? DiaryTableViewCell else {
-            return UITableViewCell()
-        }
+        let cell = tableView.dequeueReusableCell(with: DiaryTableViewCell.self, for: indexPath)
+
         let diary = diaryContents[indexPath.row]
-        cell.configure(day: String(diary.day), weekday: diary.weekday, content: diary.content)
+        cell.configure(
+            date: diary.date,
+            day: String(diary.day),
+            weekday: diary.weekday,
+            content: diary.content
+        )
 
         return cell
     }

@@ -7,14 +7,15 @@
 
 import UIKit
 
-final class NewDiaryEntryViewController: UIViewController {
+/// 日記作成画面
+final class CreateDiaryViewController: UIViewController {
     private lazy var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: createCollectionViewLayout()
     )
 
     private let customNavigationBar = UIView().apply {
-        $0.backgroundColor = .yellow
+        $0.backgroundColor = .appYellow
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -53,7 +54,7 @@ final class NewDiaryEntryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .yellow
+        view.backgroundColor = .appYellow
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(
@@ -127,23 +128,23 @@ final class NewDiaryEntryViewController: UIViewController {
             }
 
             // 現在アクティブなセルのインデックスパスを取得
-            let visibleRect = CGRect(origin: self.collectionView.contentOffset, size: self.collectionView.bounds.size)
+            let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
             let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
 
             guard
-                let visibleIndexPath = self.collectionView.indexPathForItem(at: visiblePoint),
-                let cell = self.collectionView.cellForItem(at: visibleIndexPath) as? TextViewCollectionViewCell,
+                let visibleIndexPath = collectionView.indexPathForItem(at: visiblePoint),
+                let cell = collectionView.cellForItem(at: visibleIndexPath) as? TextViewCollectionViewCell,
                 !cell.textContent.isEmpty
             else {
                 return
             }
 
-            let selectedDate = self.diaryDatePicker.date
+            let date = diaryDatePicker.date
             let content = cell.textContent
             // CoreDataに保存
-            DiaryModel.saveDiary(date: selectedDate, content: content)
+            DiaryModel.saveDiary(date: date, content: content)
 
-            self.dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }, for: .touchUpInside)
     }
 
@@ -188,7 +189,7 @@ final class NewDiaryEntryViewController: UIViewController {
 
     @objc
     func doneButtonPressed() {
-        self.view.endEditing(true)
+        view.endEditing(true)
         toolBar.isHidden = true
     }
 
@@ -212,7 +213,7 @@ final class NewDiaryEntryViewController: UIViewController {
     }
 }
 
-extension NewDiaryEntryViewController: UICollectionViewDataSource {
+extension CreateDiaryViewController: UICollectionViewDataSource {
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
@@ -235,7 +236,7 @@ extension NewDiaryEntryViewController: UICollectionViewDataSource {
     }
 }
 
-extension NewDiaryEntryViewController: UICollectionViewDelegate {
+extension CreateDiaryViewController: UICollectionViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageIndex = round(scrollView.contentOffset.x / scrollView.frame.width)
         // TODO: 縦スクロールで判定される問題を修正する

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import HolidayJp
 
 enum Weekday: Int, CaseIterable {
     case sunday = 1
@@ -28,14 +29,15 @@ enum Weekday: Int, CaseIterable {
         }
     }
 
-    var color: UIColor {
+    func holidayColor(for date: Date) -> UIColor {
+        
         switch self {
         case .sunday:
                 .red
         case .saturday:
                 .blue
         default:
-                .black
+            HolidayJp.isHoliday(date) ? .red : .black
         }
     }
 }
